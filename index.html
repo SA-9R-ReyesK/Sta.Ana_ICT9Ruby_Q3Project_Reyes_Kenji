@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eSakayMo · fare guide</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body { background: #fff0f3; font-family: 'Segoe UI', Roboto, sans-serif; }
+    .navbar { background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.05); padding: 0.5rem 1rem; }
+    .btn-outline-book { border: 1px solid #d44e6c; border-radius: 12px; color: #d44e6c; font-weight: 500; }
+    .btn-outline-book:hover { background: #ffe4e9; }
+    .btn-warning-custom { background: #ffb6c1; border: none; border-radius: 12px; font-weight: 600; padding: 8px 24px; color: #4a2c3a; }
+    .btn-warning-custom:hover { background: #ff9eb5; }
+    .fare-card { background: white; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.05); padding: 2rem; }
+    .pickup-box, .drop-box { background: #fff8fa; border-radius: 12px; padding: 0.75rem 1.5rem; border: 1px solid #ffccd5; }
+    .pickup-box label, .drop-box label { font-weight: 600; font-size: 0.9rem; color: #9d4e6b; margin-bottom: 4px; }
+    .form-select-custom { border: none; background: transparent; font-weight: 600; color: #4a2c3a; font-size: 1.2rem; outline: none; width: auto; }
+    .fare-badge { background: #ffe4e9; border-radius: 12px; padding: 0.5rem 2rem; font-size: 2rem; font-weight: 700; color: #9d4e6b; display: inline-block; }
+    .footer { background: #4a2c3a; color: #fff0f3; padding: 1rem 0; font-size: 0.9rem; text-align: center; }
+    .footer a { color: #ffb6c1; }
+    .nav-link.active { font-weight: 700; border-bottom: 2px solid #d44e6c; color: #d44e6c; }
+    .bg-pink-soft { background: #fff0f3; }
+    .instruction-box { background: #ffeef2; border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem; }
+    .badge-custom { background: white; color: #4a2c3a; border: 1px solid #ffccd5; border-radius: 12px; padding: 0.75rem 1.5rem; font-size: 1rem; }
+    .badge-custom-dark { background: #4a2c3a; color: #ffb6c1; border-radius: 12px; padding: 0.75rem 1.5rem; font-size: 1rem; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-white">
+  <div class="container">
+    <a class="navbar-brand fw-bold fs-4" href="?page=home">eSakayMo</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navBar">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fw-semibold gap-3">
+        <li class="nav-item"><a class="nav-link active" href="?page=home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="?page=farematrix">Fare Matrix</a></li>
+        <li class="nav-item"><a class="nav-link" href="?page=schedule">Schedule</a></li>
+        <li class="nav-item"><a class="nav-link" href="?page=help">Help</a></li>
+      </ul>
+      <div class="d-flex gap-2">
+        <a href="?page=register" class="btn btn-outline-book px-4 py-2">Create Account</a>
+        <a href="#" class="btn btn-warning-custom px-4 py-2">Book Now</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container my-5">
+
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-7">
+      <div class="fare-card">
+        <h2 class="fw-bold mb-3" style="color:#9d4e6b;">Welcome to eSakayMo Fare Guide!</h2>
+        <p class="mb-4"><a href="#" class="text-decoration-none" id="showInstructions" style="color:#d44e6c;">Clicl here for onstructions</a></p>
+        
+        <div id="instructionBlock" style="display: none;" class="instruction-box">
+          <p class="mb-1"><strong>Fare = base ₱50 (first 2km) + ₱10/km</strong></p>
+          <p class="mb-0 small">Terminal distances: LRT1 20km, LRT2 13.8km, MRT3 16.9km</p>
+        </div>
+        
+        <div class="pickup-box d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <label>PICK-UP LOCATION</label>
+            <div>
+              <select class="form-select-custom" id="pickupSelect">
+                <option value="North Avenue" selected>North Avenue</option>
+                <option value="Taft Avenue">Taft Avenue</option>
+                <option value="Roosevelt">Roosevelt</option>
+                <option value="Baclaran">Baclaran</option>
+                <option value="Santolan">Santolan</option>
+                <option value="Recto">Recto</option>
+              </select>
+            </div>
+          </div>
+          <i class="fa-solid fa-circle-check" style="color:#d44e6c; font-size:1.5rem;"></i>
+        </div>
+        
+        <div class="drop-box d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <label>DROP-OFF LOCATION</label>
+            <div>
+              <select class="form-select-custom" id="dropoffSelect">
+                <option value="Taft Avenue" selected>Taft Avenue</option>
+                <option value="North Avenue">North Avenue</option>
+                <option value="Baclaran">Baclaran</option>
+                <option value="Roosevelt">Roosevelt</option>
+                <option value="Recto">Recto</option>
+                <option value="Santolan">Santolan</option>
+              </select>
+            </div>
+          </div>
+          <i class="fa-solid fa-flag-checkered" style="color:#d44e6c; font-size:1.5rem;"></i>
+        </div>
+
+        <div class="d-flex flex-wrap align-items-center justify-content-between mt-3">
+          <span class="fare-badge" id="fareDisplay">₱165.00</span>
+          <div class="d-flex gap-2">
+            <span class="badge-custom">Regular Fare</span>
+            <span class="badge-custom-dark" id="discountLabel">Discounted Fare</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const basefare = 50;
+    const baseKM = 2;
+    const perKMrate = 10;
+    const stationDist = {
+      'North Avenue': 16.9, 'Taft Avenue': 0,
+      'Roosevelt': 20, 'Baclaran': 0,
+      'Santolan': 13.8, 'Recto': 0
+    };
+    stationDist['Baclaran'] = 20;
+    stationDist['Recto'] = 13.8;
+    stationDist['Taft Avenue'] = 0;
+
+    function getDistance(pickup, drop) {
+      if (pickup === 'Taft Avenue' && drop === 'North Avenue') return 16.9;
+      if (pickup === 'North Avenue' && drop === 'Taft Avenue') return 16.9;
+      if (pickup === 'Roosevelt' && drop === 'Baclaran') return 20;
+      if (pickup === 'Baclaran' && drop === 'Roosevelt') return 20;
+      if (pickup === 'Santolan' && drop === 'Recto') return 13.8;
+      if (pickup === 'Recto' && drop === 'Santolan') return 13.8;
+      let a = stationDist[pickup] ?? 0;
+      let b = stationDist[drop] ?? 0;
+      return Math.abs(a - b) || 16.9;
+    }
+
+    function computeFare() {
+      const pickup = document.getElementById('pickupSelect').value;
+      const drop = document.getElementById('dropoffSelect').value;
+      let dist = getDistance(pickup, drop);
+      let extra = Math.max(0, dist - baseKM);
+      let fare = basefare + (extra * perKMrate);
+      fare = Math.round(fare * 100) / 100;
+      document.getElementById('fareDisplay').innerText = '₱' + fare.toFixed(2);
+    }
+
+    document.getElementById('pickupSelect').addEventListener('change', computeFare);
+    document.getElementById('dropoffSelect').addEventListener('change', computeFare);
+    window.onload = computeFare;
+
+    document.getElementById('showInstructions').addEventListener('click', function(e) {
+      e.preventDefault();
+      const inst = document.getElementById('instructionBlock');
+      inst.style.display = inst.style.display === 'none' ? 'block' : 'none';
+    });
+  </script>
+
+  <div class="row justify-content-center">
+    <div class="col-md-7 col-lg-6">
+      <div class="fare-card p-4">
+        <h3 class="fw-bold mb-4" style="color:#9d4e6b;">REGISTRATION</h3>
+        <form action="?page=confirmation" method="get">
+          <div class="row g-3">
+            <div class="col-md-6"><label class="form-label fw-semibold">First Name</label><input type="text" name="first" class="form-control" required style="border-radius:12px;"></div>
+            <div class="col-md-6"><label class="form-label fw-semibold">Last Name</label><input type="text" name="last" class="form-control" required style="border-radius:12px;"></div>
+            <div class="col-6"><label class="form-label fw-semibold">Age</label><input type="number" name="age" class="form-control" style="border-radius:12px;"></div>
+            <div class="col-6"><label class="form-label fw-semibold">Contact Number</label><input type="tel" name="contact" class="form-control" style="border-radius:12px;"></div>
+            <div class="col-12"><label class="form-label fw-semibold">Email</label><input type="email" name="email" class="form-control" required style="border-radius:12px;"></div>
+            <div class="col-12"><label class="form-label fw-semibold">Enter your username</label><input type="text" name="username" class="form-control" style="border-radius:12px;"></div>
+            <div class="col-12"><label class="form-label fw-semibold">Upload file</label>
+              <div class="input-group">
+                <input type="file" class="form-control" style="border-radius:12px 0 0 12px;">
+                <span class="input-group-text" style="background:#ffe4e9; border-radius:0 12px 12px 0;">Choose File</span>
+              </div>
+              <span class="small text-secondary">No file chosen</span>
+            </div>
+            <div class="col-12"><label class="form-label fw-semibold">Enter your password</label><input type="password" name="password" class="form-control" style="border-radius:12px;"></div>
+            <div class="col-12 text-center mt-4">
+              <button type="submit" class="btn btn-warning-custom px-5 py-2">Create Account</button>
+            </div>
+          </div>
+        </form>
+        <div class="text-center small text-secondary mt-4">Student Name | Grade & Section ©2026</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row justify-content-center">
+    <div class="col-md-7 col-lg-6">
+      <div class="fare-card p-5 text-center">
+        <i class="fa-solid fa-circle-check fa-4x mb-3" style="color:#d44e6c;"></i>
+        <h3 class="fw-bold" style="color:#9d4e6b;">Welcome</h3>
+        <p class="fs-5">Your account has been created.</p>
+        <p class="text-secondary">Confirmation sent</p>
+        <a href="?page=home" class="btn btn-warning-custom mt-3 px-5">Back to Home</a>
+        <div class="mt-4 small text-secondary">Student Name | Grade & Section ©2026</div>
+      </div>
+    </div>
+  </div>
+
+<footer class="footer">
+  <div class="container">
+    <span><i class="fa-regular fa-user me-1"></i> Alexander Espinosa & Kenji Reyes | Grade 9 - ICT</span><br>
+    <span><i class="fa-regular fa-copyright me-1"></i>2026 eSakayMo </span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
